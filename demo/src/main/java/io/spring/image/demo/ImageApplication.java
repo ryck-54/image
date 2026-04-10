@@ -10,4 +10,4 @@ public class ImageApplication {
 		SpringApplication.run(ImageApplication.class, args);
 	}
 
-}
+}0

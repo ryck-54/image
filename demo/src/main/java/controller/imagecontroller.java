@@ -8,13 +8,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
+
+@RestController
+@RequestMapping("/upload")
+@Slf4j
 public class imagecontroller {
     //*
     // {"name": "", "size":100} //application/json
     //*
 
     // mult-part/formdata
-    //*
+    //
 
     @PostMapping
     public ResponseEntity uploadImage(@RequestParam("file")  MultipartFile file,
