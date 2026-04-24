@@ -26,6 +26,10 @@ public class ImageApplication {
 	//		repository.save(image);
 
 	//	};
+
+	public static void main(String[] args) {
+		SpringApplication.run(ImageApplication.class, args);
+	}
 	}
 
 
