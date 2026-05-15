@@ -16,6 +16,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/image")
@@ -82,6 +83,22 @@ public class ImagesController {
         headers.setContentDispositionFormData("inline; filename=\"" + image.getFileName() +  "\"", image.getFileName());
 
         return new ResponseEntity<>(image.getFile(), headers, HttpStatus.OK);
+    }
+    @GetMapping
+    public ResponseEntity<ImageDTO> search(
+        @RequestParam(value = "extension", required = false, defaultValue = "")String extension
+        @RequestParam(value= "query", required = false)String query) throws InterruptedException{
+        thread.sleep(milis: 3000L);
+        var result = service.search(ImageExtension.valueOf(extension), query);
+
+        var images = result.stream().map(image ->{
+            var url = buildImageURL(image);
+            return mapper.imagetoDTO(image, url.toString());
+        }).collect(Collectors.toCollection());
+        return ResponseEntity.ok(images);
+    }
+    ){
+
     }
 
     private URI buildImageURL(Image image){
